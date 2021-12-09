@@ -52,7 +52,7 @@ class PresenterController extends Controller
         $presenter->save();
 
 
-        return response()->json(['Presenter is created successfully.', new Presenter()]);
+        return response()->json(['Presenter is created successfully.', $presenter]);
     }
 
     /**
