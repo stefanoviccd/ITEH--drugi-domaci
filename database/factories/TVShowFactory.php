@@ -18,7 +18,7 @@ class TVShowFactory extends Factory
         return [
             'name' => $this->faker->word(),
             'description' => $this->faker->text(),
-            'duration' => random_int(0,200),
+            'duration' => random_int(50,200),
             'created_at'=>now(),
             'updated_at'=>now(),
             'studio_id'=>Studio::factory(),

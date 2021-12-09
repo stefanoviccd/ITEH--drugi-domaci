@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTVShowsTable extends Migration
+class ChangeFirstnameToNameInPresentersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,8 @@ class CreateTVShowsTable extends Migration
      */
     public function up()
     {
-        Schema::create('t_v_shows', function (Blueprint $table) {
-            $table->id();
-            $table->string("name")->unique();
-            $table->text("description")->nullable();
-            $table->integer("duration");
-            $table->timestamps();
+        Schema::table('presenters', function (Blueprint $table) {
+            $table->renameColumn("firstname", "name");
         });
     }
 
@@ -29,6 +25,8 @@ class CreateTVShowsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('t_v_shows');
+        Schema::table('presenters', function (Blueprint $table) {
+            $table->renameColumn("name","firstname");
+        });
     }
 }
