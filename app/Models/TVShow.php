@@ -14,5 +14,5 @@ class TVShow extends Model
     }
     public function presenter(){
         return $this->belongsTo(Presenter::class);
-    }
+    }  
 }
