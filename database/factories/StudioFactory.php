@@ -2,7 +2,9 @@
 
 namespace Database\Factories;
 
+use Faker\Core\Number;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use PhpParser\Node\Expr\Cast\Double;
 
 class StudioFactory extends Factory
 {
@@ -14,7 +16,9 @@ class StudioFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'name' => $this->faker->word(),
+            'price' =>random_int(0,2000)
+            
         ];
     }
 }
