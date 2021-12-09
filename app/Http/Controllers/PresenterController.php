@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Presenter;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class PresenterController extends Controller
 {
@@ -14,7 +15,7 @@ class PresenterController extends Controller
      */
     public function index()
     {
-        //
+        return Presenter::all();
     }
 
     /**
@@ -24,7 +25,7 @@ class PresenterController extends Controller
      */
     public function create()
     {
-        //
+        
     }
 
     /**
@@ -35,7 +36,23 @@ class PresenterController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            "name" => 'required|string|max:255',
+            
+        ]);
+
+        if ($validator->fails())
+        //return response()->json($request);
+            return response()->json($validator->errors());
+
+        $presenter = Presenter::create([
+            'name' => $request->name
+           
+        ]);
+        $presenter->save();
+
+
+        return response()->json(['Presenter is created successfully.', new Presenter()]);
     }
 
     /**
@@ -44,9 +61,13 @@ class PresenterController extends Controller
      * @param  \App\Models\Presenter  $presenter
      * @return \Illuminate\Http\Response
      */
-    public function show(Presenter $presenter)
+    public function show($id)
     {
-        //
+    
+    $pres = Presenter::find($id);
+        if (is_null($pres))
+            return response()->json('Data not found', 404);
+        return response()->json($pres);
     }
 
     /**
@@ -57,7 +78,7 @@ class PresenterController extends Controller
      */
     public function edit(Presenter $presenter)
     {
-        //
+        
     }
 
     /**
@@ -69,7 +90,7 @@ class PresenterController extends Controller
      */
     public function update(Request $request, Presenter $presenter)
     {
-        //
+        
     }
 
     /**
@@ -78,8 +99,8 @@ class PresenterController extends Controller
      * @param  \App\Models\Presenter  $presenter
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Presenter $presenter)
+    public function destroy($id)
     {
-        //
+        Presenter::destroy($id);
     }
 }
