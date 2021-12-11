@@ -100,9 +100,23 @@ class TVShowController extends Controller
      * @param  \App\Models\TVShow  $tVShow
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, TVShow $tVShow)
+    public function update(Request $request, $id)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            "name" => 'bail|required|string|max:255',
+            "description" => 'bail|required|string',
+            "duration"=>'bail|required',
+            "studio_id"=>'bail|required',
+            "presenter_id"=>'required'
+        ]);
+
+        if ($validator->fails())
+             return response()->json($validator->errors());
+        $show=TVShow::find($id);
+        //update it
+        $show->update($request->all());
+        //return it
+        return $show;
     }
 
     /**

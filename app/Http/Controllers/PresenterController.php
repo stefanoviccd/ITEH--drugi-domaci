@@ -93,7 +93,23 @@ class PresenterController extends Controller
      */
     public function update(Request $request, $id)
     {
-        
+        //validate inputs
+        $validator = Validator::make($request->all(), [
+            "name" => 'required|string|max:255',
+          
+            
+        ]);
+
+        if ($validator->fails())
+     
+            return response()->json($validator->errors());
+
+        //get the studio
+        $presenter=Presenter::find($id);
+        //update it
+        $presenter->update($request->all());
+        //return it
+        return $presenter;
     }
 
     /**

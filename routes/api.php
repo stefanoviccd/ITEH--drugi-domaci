@@ -43,13 +43,15 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
   Route::post('/login', [AuthController::class, 'login'])->name('login');
   Route::group(['middleware' => ['auth:sanctum']], function () {
-    Route::get('/profile', function (Request $request) {
+  Route::get('/profile', function (Request $request) {
         return auth()->user();
     });
     Route::resource("presenters", PresenterController::class)->only(['store', 'create','show']);
+    Route::put("presenters/{id}", [PresenterController::class, "update"]);
     Route::resource("studios", StudioController::class)->only(['store', 'create','show']);
     Route::put("studios/{id}", [StudioController::class, "update"]);
     Route::resource("tvshows", TVShowController::class)->only(['store', 'create','show']);
+    Route::put("tvshows/{id}", [TVShowController::class, "update"]);
 
     
 
