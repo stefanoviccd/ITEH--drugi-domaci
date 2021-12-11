@@ -45,7 +45,7 @@ class PresenterController extends Controller
         ]);
 
         if ($validator->fails())
-        //return response()->json($request);
+    
             return response()->json($validator->errors());
 
         $presenter = Presenter::create([
@@ -91,7 +91,7 @@ class PresenterController extends Controller
      * @param  \App\Models\Presenter  $presenter
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Presenter $presenter)
+    public function update(Request $request, $id)
     {
         
     }

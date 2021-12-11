@@ -48,6 +48,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     });
     Route::resource("presenters", PresenterController::class)->only(['store', 'create','show']);
     Route::resource("studios", StudioController::class)->only(['store', 'create','show']);
+    Route::put("studios/{id}", [StudioController::class, "update"]);
     Route::resource("tvshows", TVShowController::class)->only(['store', 'create','show']);
 
     
