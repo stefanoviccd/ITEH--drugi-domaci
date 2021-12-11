@@ -113,4 +113,14 @@ class TVShowController extends Controller
     {
         TVShow::destroy($id);
     }
+     /**
+     * Remove the specified resource from storage.
+     *
+     * @param  string name
+     * @return \Illuminate\Http\Response
+     */
+    public function search($name)
+    {
+        return TVShow::where('name', 'like', '%'.$name.'%')->get();
+    }
 }

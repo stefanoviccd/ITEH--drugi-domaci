@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\PresenterController;
 use App\Http\Controllers\StudioController;
 use App\Http\Controllers\TVShowController;
@@ -37,4 +38,17 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
   Route::get('/tvshows/{id}', [TVShowController::class, 'show']);
   Route::post('/tvshows/add', [TVShowController::class, 'store']);
   Route::post('/tvshows/delete/{id}', [TVShowController::class, 'destroy']);
+  Route::get('/tvshows/search/{name}', [TVShowController::class, 'search']);
+
+  //route for registration
+  Route::post('/register', [AuthController::class, 'register']);
  
+  Route::group(['middleware' => ['auth:sanctum']], function () {
+    Route::get('/profile', function(Request $request) {
+        return auth()->user();
+    });
+   // Route::resource('posts', PostController::class)->only(['update','store','destroy']);
+
+    // API route for logout user
+    Route::post('/logout', [AuthController::class, 'logout']);
+});
