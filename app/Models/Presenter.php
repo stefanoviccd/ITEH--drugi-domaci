@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Http\Resources\TVShowCollection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -10,8 +11,10 @@ class Presenter extends Model
     public $timestamps = false;
     protected $guarded=['id'];
     use HasFactory;
-    public function tv_shows(){
-        return $this->hasMany(TVShow::class);
+    public function tvshows(){
+       return $shows=$this->hasMany(TVShow::class);
+    
     }
+   
 
 }

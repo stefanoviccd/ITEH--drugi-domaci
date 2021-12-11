@@ -22,8 +22,8 @@ class TVShowResource extends JsonResource
         'id'=>$this->resource->id,
         'name'=>$this->resource->name,
         'description'=>$this->resource->description,
-        'studio'=>new Studio($this->resource->studio),
-        'presenter' => new Presenter($this->resource->presenter)
+        'studio'=>$this->resource->studio,
+        'presenter' => $this->resource->presenter
     ];
     }
 }

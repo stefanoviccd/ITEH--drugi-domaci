@@ -4,6 +4,7 @@ use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\PresenterController;
 use App\Http\Controllers\StudioController;
 use App\Http\Controllers\TVShowController;
+use App\Models\TVShow;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -22,22 +23,19 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 //routes for Presenter
- Route::get('/presenters', [PresenterController::class, 'index']);
- Route::get('/presenters/{id}', [PresenterController::class, 'show']);
- Route::post('/presenters/add', [PresenterController::class, 'store']);
- Route::post('/presenters/delete/{id}', [PresenterController::class, 'destroy']);
+
+ Route::resource("presenters", PresenterController::class)->only(['index']);
 
  //routes for Studio
- Route::get('/studios', [StudioController::class, 'index']);
- Route::get('/studios/{id}', [StudioController::class, 'show']);
- Route::post('/studios/add', [StudioController::class, 'store']);
- Route::post('/studios/delete/{id}', [StudioController::class, 'destroy']);
+
+ Route::resource("studios", StudioController::class)->only(['index']);
 
   //routes for TVShow
-  Route::get('/tvshows', [TVShowController::class, 'index']);
-  Route::get('/tvshows/{id}', [TVShowController::class, 'show']);
-  Route::post('/tvshows/add', [TVShowController::class, 'store']);
-  Route::post('/tvshows/delete/{id}', [TVShowController::class, 'destroy']);
+
+   Route::resource("tvshows", TVShowController::class)->only(['index']);
+   Route::get('/tvshows/search/{name}', [TVShowController::class, 'search']);
+
+
 
 
   //route for registration
@@ -48,8 +46,13 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     Route::get('/profile', function (Request $request) {
         return auth()->user();
     });
-  Route::get('/tvshows/search/{name}', [TVShowController::class, 'search']);
-    Route::resource('posts', PostController::class)->only(['update', 'store', 'destroy']);
+    Route::resource("presenters", PresenterController::class)->only(['store', 'create','show']);
+    Route::resource("studios", StudioController::class)->only(['store', 'create','show']);
+    Route::resource("tvshows", TVShowController::class)->only(['store', 'create','show']);
+
+    
+
+
 
     Route::post('/logout', [AuthController::class, 'logout']);
 });

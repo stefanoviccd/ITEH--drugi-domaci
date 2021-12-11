@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\PresenteCollection;
+use App\Http\Resources\PresenterCollection;
 use App\Models\Presenter;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -15,7 +17,8 @@ class PresenterController extends Controller
      */
     public function index()
     {
-        return Presenter::all();
+        $presenters= Presenter::all();
+        return new PresenterCollection($presenters);
     }
 
     /**

@@ -13,5 +13,6 @@ class Studio extends Model
     public function tv_shows(){
         return $this->hasMany(TVShow::class);
     } 
+    
 
 }

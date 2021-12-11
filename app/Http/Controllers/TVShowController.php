@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\TVShowCollection;
 use App\Models\TVShow;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -15,7 +16,8 @@ class TVShowController extends Controller
      */
     public function index()
     {
-        return TVShow::all();
+        $shows= TVShow::all();
+        return new TVShowCollection($shows);
     }
 
     /**
