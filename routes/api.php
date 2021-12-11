@@ -17,10 +17,10 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
 //routes for Presenter
  Route::get('/presenters', [PresenterController::class, 'index']);
  Route::get('/presenters/{id}', [PresenterController::class, 'show']);
@@ -38,17 +38,21 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
   Route::get('/tvshows/{id}', [TVShowController::class, 'show']);
   Route::post('/tvshows/add', [TVShowController::class, 'store']);
   Route::post('/tvshows/delete/{id}', [TVShowController::class, 'destroy']);
-  Route::get('/tvshows/search/{name}', [TVShowController::class, 'search']);
+
 
   //route for registration
   Route::post('/register', [AuthController::class, 'register']);
- 
+
+  Route::post('/login', [AuthController::class, 'login'])->name('login');
   Route::group(['middleware' => ['auth:sanctum']], function () {
-    Route::get('/profile', function(Request $request) {
+    Route::get('/profile', function (Request $request) {
         return auth()->user();
     });
-   // Route::resource('posts', PostController::class)->only(['update','store','destroy']);
+  Route::get('/tvshows/search/{name}', [TVShowController::class, 'search']);
+    Route::resource('posts', PostController::class)->only(['update', 'store', 'destroy']);
 
-    // API route for logout user
     Route::post('/logout', [AuthController::class, 'logout']);
 });
+ 
+  
+  
