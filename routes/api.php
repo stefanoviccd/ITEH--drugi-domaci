@@ -46,16 +46,16 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     Route::get('/profile', function (Request $request) {
         return auth()->user();
     });
-    Route::resource("presenters", PresenterController::class)->only(['store', 'create', 'update', 'show']);
+    Route::resource("presenters", PresenterController::class)->only(['store', 'update', 'show']);
    // Route::get("presenters/{id}", [PresenterController::class, 'show']);
    // Route::put("presenters/{id}", [PresenterController::class, "update"]);
  
-    Route::resource("studios", StudioController::class)->only(['store', 'create', 'update', 'show']);
+    Route::resource("studios", StudioController::class)->only(['store','update', 'show']);
    // Route::get("studios/{id}", [StudioController::class, 'show']);
    // Route::put("studios/{id}", [StudioController::class, "update"]);
 
 
-    Route::resource("tvshows", TVShowController::class)->only(['store', 'create', 'update','show']);
+    Route::resource("tvshows", TVShowController::class)->only(['store', 'update','show']);
     //Route::get("tvshows/{id}", [TVShowController::class, 'show']);
    // Route::put("tvshows/{id}", [TVShowController::class, "update"]);
 
