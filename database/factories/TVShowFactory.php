@@ -21,7 +21,7 @@ class TVShowFactory extends Factory
             'duration' => random_int(50,200),
             'created_at'=>now(),
             'updated_at'=>now(),
-            'studio_id'=>Studio::factory(),
+            'studio_id'=>Studio::find(4),
             'presenter_id'=>Presenter::factory()
 
             
